@@ -624,6 +624,16 @@ class FA2(FA2_change_metadata, FA2_token_metadata, FA2_mint, FA2_administrator, 
             sp.result("total-supply not supported")
 
     @sp.offchain_view(pure = True)
+    def isBurned(self, tok):
+        if self.config.store_total_supply:
+            sp.verify(self.data.token_metadata.contains(tok), "Token not found")
+            sp.result(self.data.total_supply[tok] == sp.nat(0))
+        else:
+            sp.set_type(tok, sp.TNat)
+            sp.result("total-supply not supported")
+            
+
+    @sp.offchain_view(pure = True)
     def is_operator(self, query):
         sp.set_type(query,
                     sp.TRecord(token_id = sp.TNat,

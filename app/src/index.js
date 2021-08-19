@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './context/ThemeContext';
+import { MetaMaskProvider } from 'metamask-react'
 
 ReactDOM.render(
   <React.StrictMode>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <MetaMaskProvider>
+          <ThemeProvider>
+            <App/>
+          </ThemeProvider>
+      </MetaMaskProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

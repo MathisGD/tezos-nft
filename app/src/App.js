@@ -1,21 +1,22 @@
 import './App.css';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar.js'
 import Bridge from './components/Bridge.js'
-import { MetaMaskProvider } from 'metamask-react'
-import React from "react";
-
+import { useMetaMask } from 'metamask-react'
 
 function App() {
+
+    const { ethereum, status, account } = useMetaMask();
+    const [balance, setBalance] = useState(0);
+
     return (
     <div className="App">
-        <MetaMaskProvider>
-            <header className="App-header">
-                <Navbar />
-                <div className="Content">
-                    <Bridge />
-                </div>
-            </header>
-        </MetaMaskProvider>
+        <header className="App-header">
+            <Navbar status={status} balance={balance}/>
+            <div className="Content">
+                <Bridge ethereum={ethereum} status={status} account={account} setBalance={setBalance}/>
+            </div>
+        </header>
     </div>
   );
 }

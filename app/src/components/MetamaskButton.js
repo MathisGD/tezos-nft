@@ -17,7 +17,7 @@ export default function EthereumButton() {
 
     if (status === "connecting") ethStatus = <div>Connecting...</div>
 
-    if (status === "connected") ethStatus = <div>Connected account: {account}</div>
+    if (status === "connected") ethStatus = <div>Signed as: {account.replace(account.substring(4,38), "...")}</div>
 
     return <Typography variant="body1">{ethStatus}</Typography> ;
 
